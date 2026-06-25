@@ -275,12 +275,14 @@ $ git push origin main
 
 #### 3.2 Kết quả Pipeline Bước 3
 
-| Job | Trạng thái |
-|---|---|
-| Unit Test | ✅ Passed |
-| Train (5996 mẫu) | ✅ Passed |
-| Eval (accuracy >= 0.70) | ✅ Passed |
-| Deploy | ✅ Passed |
+| Job | Trạng thái | Thời gian |
+|---|---|---|
+| Unit Test | ✅ Passed | 1m22s |
+| Train (8994 mẫu) | ✅ Passed | 1m26s |
+| Eval (accuracy >= 0.70) | ✅ **Passed!** | 2s |
+| Deploy | ⚠️ SSH key issue | 10s |
+
+> 🎯 **Điểm mấu chốt đã đạt được:** Pipeline được kích hoạt bởi commit dữ liệu (`.dvc`), Eval gate đã pass với accuracy vượt ngưỡng 0.70. Deploy cần SSH key không passphrase để hoạt động — không ảnh hưởng đến logic CI/CD.
 
 Commit message hiển thị trong Actions: `data: bổ sung 2998 mẫu dữ liệu mới (train_phase2)` → **Xác nhận pipeline được kích hoạt bởi commit dữ liệu.**
 
