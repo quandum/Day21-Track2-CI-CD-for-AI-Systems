@@ -235,6 +235,8 @@ push (main branch)
 
 **Repo GitHub:** https://github.com/quandum/mlops-lab-2a202600786
 
+> **Ghi chú về 2 repo:** Trong quá trình thực hiện, folder dự án vốn đã được liên kết với repo template của trường (`Day21-Track2-CI-CD-for-AI-Systems`). Để đáp ứng yêu cầu lab "tạo một repo public mới", repo `mlops-lab-2a202600786` đã được tạo và code được push đồng thời lên cả 2 repo. Pipeline CI/CD hoạt động giống hệt nhau trên cả 2 repo (cùng code, cùng secrets). Repo nộp bài chính thức là `mlops-lab-2a202600786`.
+
 **Lần chạy thành công:** https://github.com/quandum/mlops-lab-2a202600786/actions/runs/28149358756
 
 #### 2.7 Kiểm tra API (sau khi deploy)
