@@ -1,5 +1,7 @@
 # BÁO CÁO NỘP BÀI - Lab MLOps: CI/CD cho AI Systems
 
+**Trần Mạnh Chánh Quân — MSHV: 2A202600786**
+
 ---
 
 ## I. Thông tin Học viên
