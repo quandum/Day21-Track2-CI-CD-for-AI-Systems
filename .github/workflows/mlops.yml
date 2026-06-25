@@ -130,25 +130,42 @@ jobs:
     needs: eval
     runs-on: ubuntu-latest
     steps:
-
-      - name: SSH deploy to VM
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
         with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          script: |
-            # Restart service
-            sudo systemctl restart mlops-serve
-            sleep 5
-            # Health check
-            for i in 1 2 3 4 5; do
-              if curl -sf http://localhost:8000/health; then
-                echo "Health check passed."
-                exit 0
-              fi
-              echo "Retry $i/5..."
-              sleep 3
-            done
-            echo "Health check failed after 5 retries."
-            exit 1
+          credentials_json: ${{ secrets.CLOUD_CREDENTIALS }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: vinai20k2-2a202600786-day21lab
+
+      - name: Deploy to VM via gcloud SSH
+        run: |
+          gcloud compute ssh mlops-serve \
+            --zone=us-central1-a \
+            --project=vinai20k2-2a202600786-day21lab \
+            --quiet \
+            --command="
+              export GOOGLE_APPLICATION_CREDENTIALS=/home/quand/sa-key.json
+              python3 -c \"
+              from google.cloud import storage
+              client = storage.Client()
+              bucket = client.bucket('mlops-lab-2a202600786')
+              blob = bucket.blob('models/latest/model.pkl')
+              blob.download_to_filename('/home/quand/models/model.pkl')
+              print('Model downloaded.')
+              \"
+              sudo systemctl restart mlops-serve
+              sleep 5
+              for i in 1 2 3 4 5; do
+                if curl -sf http://localhost:8000/health; then
+                  echo 'Health check passed.'
+                  exit 0
+                fi
+                echo \"Retry \$i/5...\"
+                sleep 3
+              done
+              echo 'Health check failed.'
+              exit 1
+            "
