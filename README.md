@@ -58,9 +58,9 @@ min_samples_split: 2
 
 > **Lưu ý:** MLflow UI ban đầu không mở được do Python 3.14 xóa `importlib.abc.Traversable`. Đã sửa bằng cách đổi import sang `importlib.resources.abc.Traversable` trong `mlflow/assistant/skill_installer.py`. UI hiện đã hoạt động bình thường.
 
-#### 1.3 Ảnh chụp MLflow UI
+#### 1.3 MLflow UI - Training Runs ✅
 
-> *(Chèn ảnh chụp màn hình từ http://127.0.0.1:5000 — nếu không mở được do Python 3.14, có thể dùng Python 3.10 riêng để chạy `mlflow ui`)*
+![MLflow UI](screenshots/mlflow-ui.png)
 
 ---
 
